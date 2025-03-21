@@ -125,7 +125,7 @@ corr_dat_sub = pd.read_csv(
 y_top = 0.985
 gs = gridspec.GridSpec(
     1,2,width_ratios=[2,1])
-mpl.rcParams.update({'font.size':24})
+mpl.rcParams.update({'font.size':22})
 fig= plt.figure(figsize=(16,9))
 ax1 = fig.add_subplot(gs[0,0])
 sns.barplot(
@@ -137,7 +137,7 @@ sns.barplot(
 ax1.set_xticks(activation_names,labels=np.arange(1,9))
 ax1.set_xlabel('Layer')
 ax1.set_ylabel('Similarity')
-ax1.set_title('Visual',fontweight='bold')
+ax1.set_title('Visual',fontsize=21,fontweight='bold')
 ax1.set_ylim(0.0,0.46)
 y_major_locator = MultipleLocator(0.15)
 ax1.yaxis.set_major_locator(y_major_locator)
@@ -156,15 +156,15 @@ sns.barplot(
 ax2.set_xticks(cateList,labels=[])
 ax2.set_xlabel('Category')
 ax2.set_ylabel('')
-ax2.set_title('Semantic',fontweight='bold')
+ax2.set_title('Semantic',fontsize=21,fontweight='bold')
 ax2.set_ylim(0.0,0.21)
 y_major_locator = MultipleLocator(0.1)
 ax2.yaxis.set_major_locator(y_major_locator)
 fig.text(
-    0.025,y_top,'(A)',ha='center',
+    0.025,y_top,'A',ha='center',
     va='top',color='k',fontweight='bold')
 fig.text(
-    0.7,y_top,'(B)',ha='center',
+    0.7,y_top,'B',ha='center',
     va='top',color='k',fontweight='bold')
 sns.despine(offset=10,trim=True)
 plt.tight_layout()

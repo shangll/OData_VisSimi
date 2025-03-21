@@ -136,7 +136,7 @@ sns.barplot(
 ax[0].set_xlabel('Memory Set Size')
 ax[0].set_ylabel('RT (sec)')
 ax[0].set_yticks(np.arange(0.0,0.81,0.2))
-ax[0].set_title('LTM')
+ax[0].set_title('LTM',fontweight='bold')
 sns.barplot(
         data=exp_mean_all[exp_mean_all['exp']=='exp2'],
         x='setsize',y='rt',hue='cond',
@@ -146,7 +146,7 @@ sns.barplot(
 ax[1].set_xlabel('Memory Set Size')
 ax[1].set_ylabel('RT (sec)')
 ax[1].set_yticks(np.arange(0.0,0.81,0.2))
-ax[1].set_title('STM')
+ax[1].set_title('STM',fontweight='bold')
 sns.lineplot(
     data=exp_mean_all[exp_mean_all['exp']=='exp1b'],
     x='setsize',y='acc',hue='cond',dashes=False,
@@ -159,7 +159,7 @@ ax[2].set_xticks(size_list)
 ax[2].set_xlabel('Memory Set Size')
 ax[2].set_ylabel('ACC')
 ax[2].set_yticks(np.arange(0.7,1,0.1))
-ax[2].set_title('LTM')
+ax[2].set_title('LTM',fontweight='bold')
 sns.lineplot(
     data=exp_mean_all[exp_mean_all['exp']=='exp2'],
     x='setsize',y='acc',hue='cond',dashes=False,
@@ -170,9 +170,9 @@ sns.lineplot(
     legend=False,ax=ax[3])
 ax[3].set_xticks(size_list)
 ax[3].set_xlabel('Memory Set Size')
-ax[3].set_ylabel('ACC)')
+ax[3].set_ylabel('ACC')
 ax[3].set_yticks(np.arange(0.7,1,0.1))
-ax[3].set_title('STM')
+ax[3].set_title('STM',fontweight='bold')
 h,_ = ax[0].get_legend_handles_labels()
 ax[0].legend(
     h,['within','between'],loc='lower left',ncol=1,
@@ -182,10 +182,18 @@ h,_ = ax[2].get_legend_handles_labels()
 ax[2].legend(
     h,['within','between'],loc='lower left',ncol=1,
     fontsize=20,frameon=True).set_title(None)
-ax[0].text(-1,0.9,'(A)',ha='center',va='top',color='k')
-ax[1].text(-1,0.9,'(B)',ha='center',va='top',color='k')
-ax[2].text(-0.25,1.05,'(C)',ha='center',va='top',color='k')
-ax[3].text(-0.25,1.05,'(D)',ha='center',va='top',color='k')
+ax[0].text(
+    -1,0.9,'A',ha='center',va='top',
+    color='k',fontsize=29,fontweight='bold')
+ax[1].text(
+    -1,0.9,'B',ha='center',va='top',
+    color='k',fontsize=29,fontweight='bold')
+ax[2].text(
+    -0.25,1.05,'C',ha='center',va='top',
+    color='k',fontsize=29,fontweight='bold')
+ax[3].text(
+    -0.25,1.05,'D',ha='center',va='top',
+    color='k',fontsize=29,fontweight='bold')
 sns.despine(offset=10,trim=True)
 plt.tight_layout()
 plt.savefig(
@@ -195,7 +203,7 @@ plt.close('all')
 #
 #
 #
-mpl.rcParams.update({'font.size':24})
+mpl.rcParams.update({'font.size':27})
 fig,ax = plt.subplots(1,3,figsize=(24,8))
 ax = ax.ravel()
 clrs = ['black','grey','dodgerblue',
@@ -204,16 +212,16 @@ clrs = ['black','grey','dodgerblue',
 for indx,exp_tag in enumerate(exp_tags):
     if indx==0:
         leg_tag = True
-        fig_lab ='(A)'
+        fig_lab ='A'
         x_num = -1
         title_name = 'LTM'
-        y_tic = np.arange(0.45,0.86,0.1)
+        y_tic = np.arange(0.45,0.86,0.2)
         y_tic = y_tic.round(2)
         y_lab = 'RT (sec)'
     else:
         leg_tag = False
-        fig_lab ='(B)'
-        x_num = -0.02
+        fig_lab ='B'
+        x_num = -0.2
         title_name = 'STM'
 
     sns.lineplot(
@@ -238,11 +246,13 @@ for indx,exp_tag in enumerate(exp_tags):
         palette=['grey','black'],legend=leg_tag,ax=ax[indx])
 
     ax[indx].set_xticks(size_list)
-    ax[indx].set_yticks(np.arange(0.45,0.86,0.1),labels=y_tic)
-    # ax[indx].set_ylim(0.45,0.86)
+    ax[indx].set_yticks(np.arange(0.45,0.86,0.2),labels=y_tic)
+    ax[indx].set_ylim(0.45,0.86)
+    y_major_locator = MultipleLocator(0.2)
     ax[indx].set_xlabel('Memory Set Size')
     ax[indx].set_ylabel(y_lab)
-    ax[indx].set_title(title_name)
+    ax[indx].set_title(
+        title_name,fontweight='bold')
     count = 0
     for y_var in ['rt','lm','log']:
         val_list = list(
@@ -282,19 +292,26 @@ for indx,exp_tag in enumerate(exp_tags):
                     xytext=(x_pos[num]+0.05,val_list[num]),
                     color=clrs[count],size=21)
             count += 1
-    ax[indx].text(x_num,0.89,fig_lab,ha='center',va='top',color='k')
+    ax[indx].text(
+        x_num,0.9,fig_lab,ha='center',
+        va='top',color='k',
+        fontsize=29,fontweight='bold')
 
 sns.barplot(
     data=dfCoeff,x='exp',y='coeff',hue='cond',
     hue_order=['within','between'],errorbar='se',
     capsize=0.15,errcolor='grey',errwidth=1.5,
     palette='Blues',legend=True,ax=ax[2])
-ax[2].text(-1,0.079,'(C)',ha='center',va='top',color='k')
+ax[2].text(
+    -1,0.079,'C',ha='center',va='top',color='k',
+    fontweight='bold')
 ax[2].set_yticks(np.arange(0.0,0.071,0.035))
 ax[2].set_xlabel('Task')
 ax[2].set_ylabel('Coefficients')
 ax[2].set_xticks(exp_tags,['LTM','STM'])
-ax[2].set_title('Slopes of RTs in Target-Absent Trials',fontsize=22)
+ax[2].set_title(
+    'Slopes of RTs',
+    fontweight='bold')
 
 h,_ = ax[0].get_legend_handles_labels()
 ax[0].legend(

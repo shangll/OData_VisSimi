@@ -405,7 +405,7 @@ glm_data = pd.read_csv(
 simi_list = ['v','v w/o c','s w/o v','c w/o v',
              'v w/o s',
              'v w/o c&s','s w/o v&c','c w/o v&s']
-mpl.rcParams.update({'font.size':24})
+mpl.rcParams.update({'font.size':27})
 for corr_tag in corr_tags:
     for simi_tag in simi_list:
         fig,ax = plt.subplots(
@@ -440,7 +440,8 @@ for corr_tag in corr_tags:
             ax[n].set_ylim(-0.12,0.32)
             y_major_locator = MultipleLocator(0.1)
             ax[n].yaxis.set_major_locator(y_major_locator)
-            ax[n].set_title('MSS%d'%(sizeN),fontsize=18)
+            ax[n].set_title(
+                'MSS%d'%(sizeN),fontsize=25,fontweight='bold')
 
             y_gap = 0.01
             y_sig = -0.1-y_gap
@@ -497,31 +498,39 @@ for corr_tag in corr_tags:
         x_pos,y_pos = 0.04, 0.97
         if simi_tag=='v':
             semi = ''
-            figN = '(A)'
-            plt.suptitle(
-                simi_tag.upper(),
-                fontsize=26,fontweight='bold')
+            # plt.suptitle(
+            #     'Visual',
+            #     fontweight='bold')
+            # figN = '(A)'
+            # plt.suptitle(
+            #     simi_tag.upper(),
+            #     fontsize=26,fontweight='bold')
         elif simi_tag in ['v w/o c','s w/o v','c w/o v']:
             semi = '_semi1'
             figN = '(B)'
             plt.suptitle(
                 simi_tag[0].upper()+simi_tag[1:6]+simi_tag[-1].upper(),
-                fontsize=26,fontweight='bold')
+                fontweight='bold')
         elif simi_tag in ['v w/o s']:
             semi = '_semi2'
             figN = '(C)'
             plt.suptitle(
                 simi_tag[0].upper()+simi_tag[1:6]+simi_tag[-1].upper(),
-                fontsize=26,fontweight='bold')
+                fontweight='bold')
+        elif simi_tag in ['v w/o c&s']:
+            semi = '_semi'
+            plt.suptitle(
+                'Visual - Unique',
+                fontweight='bold')
         else:
             semi = '_semi'
             figN = '(D)'
             plt.suptitle(
                 simi_tag[0].upper()+simi_tag[1:6]+simi_tag[-3:].upper(),
-                fontsize=26,fontweight='bold')
-        fig.text(
-            x_pos,y_pos,figN,ha='center',
-            va='top',color='k',fontsize=24,fontweight='bold')
+                fontweight='bold')
+        # fig.text(
+        #     x_pos,y_pos,figN,ha='center',
+        #     va='top',color='k',fontsize=24,fontweight='bold')
         plt.savefig(
             os.path.join(
                 figPath,'%s_glm_%s'%(
@@ -529,7 +538,7 @@ for corr_tag in corr_tags:
         plt.show(block=True)
         plt.close('all')
 #
-mpl.rcParams.update({'font.size':24})
+mpl.rcParams.update({'font.size':27})
 for corr_tag in corr_tags:
     for simi_tag in ['s','c','s w/o c','c w/o s']:
         fig,ax = plt.subplots(
@@ -633,7 +642,7 @@ for corr_tag in corr_tags:
 glm_data_6 = glm_data[
     (glm_data['layer']=='fc_6')].reset_index(drop=True)
 simi_tagAll = ['v','s','c','v w/o c&s','s w/o v&c','c w/o v&s']
-mpl.rcParams.update({'font.size':24})
+mpl.rcParams.update({'font.size':26})
 for corr_tag in corr_tags:
     fig,ax = plt.subplots(
         2,3,sharex=True,sharey=True,
@@ -655,7 +664,7 @@ for corr_tag in corr_tags:
             hue_order=exp_tags,palette=clist,
             errorbar='se',capsize=0.15,errcolor='grey',
             legend=leg_tag,ax=ax[indx])
-        ax[indx].set_xlabel(xlabel='MSS')
+        ax[indx].set_xlabel(xlabel='Memory Set Size')
         ax[indx].set_ylabel(ylabel='Beta')
         ax[indx].set_ylim(-0.12,0.35)
         y_major_locator = MultipleLocator(0.1)
@@ -663,57 +672,57 @@ for corr_tag in corr_tags:
         y_top = 0.985
         y_bott = 0.515
         if indx==0:
-            figN = '(A1)'
+            figN = 'A'
             ax[indx].set_title(
-                simi_tag.upper(),fontsize=26,fontweight='bold')
+                'Visual',fontsize=26,fontweight='bold')
             fig.text(
                 0.025,y_top,figN,ha='center',
-                va='top',color='k',fontsize=24,
+                va='top',color='k',fontsize=28,
                 fontweight='bold')
         elif indx==1:
-            figN = '(B1)'
+            figN = 'B'
             ax[indx].set_title(
-                simi_tag[0].upper(),
+                'Semantic',
                 fontsize=26,fontweight='bold')
             fig.text(
                 0.395,y_top,figN,ha='center',
-                va='top',color='k',fontsize=24,
+                va='top',color='k',fontsize=28,
                 fontweight='bold')
         elif indx==2:
-            figN = '(C1)'
+            figN = 'C'
             ax[indx].set_title(
-                simi_tag[0].upper(),
+                'Categorical',
                 fontsize=26,fontweight='bold')
             fig.text(
                 0.7,y_top,figN,ha='center',
-                va='top',color='k',fontsize=24,
+                va='top',color='k',fontsize=28,
                 fontweight='bold')
         elif indx==3:
-            figN = '(A2)'
+            figN = 'D'
             ax[indx].set_title(
-                simi_tag[0].upper()+simi_tag[1:6]+simi_tag[-3:].upper(),
+                'Visual - Unique',
                 fontsize=26,fontweight='bold')
             fig.text(
                 0.025,y_bott,figN,ha='center',
-                va='top',color='k',fontsize=24,
+                va='top',color='k',fontsize=28,
                 fontweight='bold')
         elif indx==4:
-            figN = '(B2)'
+            figN = 'E'
             ax[indx].set_title(
-                simi_tag[0].upper()+simi_tag[1:6]+simi_tag[-3:].upper(),
+                'Semantic - Unique',
                 fontsize=26,fontweight='bold')
             fig.text(
                 0.395,y_bott,figN,ha='center',
-                va='top',color='k',fontsize=24,
+                va='top',color='k',fontsize=28,
                 fontweight='bold')
         else:
-            figN = '(C2)'
+            figN = 'F'
             ax[indx].set_title(
-                simi_tag[0].upper()+simi_tag[1:6]+simi_tag[-3:].upper(),
+                'Categorical - Unique',
                 fontsize=26,fontweight='bold')
             fig.text(
                 0.7,y_bott,figN,ha='center',
-                va='top',color='k',fontsize=24,
+                va='top',color='k',fontsize=28,
                 fontweight='bold')
     h,_ = ax[0].get_legend_handles_labels()
     ax[0].legend(
@@ -871,7 +880,7 @@ dat6 = glm_data[
 # plt_dat = pd.concat(
 #     [plt_dat_v,plt_dat_s,plt_dat_c],
 #     axis=0,ignore_index=True)
-mpl.rcParams.update({'font.size':20})
+mpl.rcParams.update({'font.size':24})
 for corr_tag in corr_tags:
     fig,ax = plt.subplots(
         1,3,sharex=True,sharey=True,figsize=(18,6))
@@ -896,31 +905,31 @@ for corr_tag in corr_tags:
         ax[n].yaxis.set_major_locator(y_major_locator)
 
         if n==0:
-            figN = '(A)'
+            figN = 'A'
             ax[n].set_title(
-                var[0].upper()+var[1:6]+var[-3:].upper(),
+                'Visual - Unique',fontsize=23,
                 fontweight='bold')
             fig.text(
                 0.025,y_top,figN,ha='center',
-                va='top',color='k',fontsize=24,
+                va='top',color='k',
                 fontweight='bold')
         elif n==1:
-            figN = '(B)'
+            figN = 'B'
             ax[n].set_title(
-                var[0].upper()+var[1:6]+var[-3:].upper(),
-                fontsize=26,fontweight='bold')
+                'Semantic - Unique',fontsize=23,
+                fontweight='bold')
             fig.text(
                 0.395,y_top,figN,ha='center',
-                va='top',color='k',fontsize=24,
+                va='top',color='k',
                 fontweight='bold')
         elif n==2:
-            figN = '(C)'
+            figN = 'C'
             ax[n].set_title(
-                var[0].upper()+var[1:6]+var[-3:].upper(),
+                'Categorical - Unique',fontsize=23,
                 fontweight='bold')
             fig.text(
                 0.7,y_top,figN,ha='center',
-                va='top',color='k',fontsize=24,
+                va='top',color='k',
                 fontweight='bold')
 
     h, _ = ax[0].get_legend_handles_labels()
